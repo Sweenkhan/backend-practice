@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-// import axios from "axios"
+import axios from "axios"
 
 
 function Register() {
@@ -7,15 +7,15 @@ function Register() {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
 
-
+  let ujwal = "hai"
     function handleSubmit(e){
       e.preventDefault();
 
-      console.log(name, password)
-        // axios.post("http://localhost:8000/sendData", {name, password})
-        // .then((result) =>{
-        //     console.log(result)
-        // })
+      // console.log(name, password)
+        axios.post("http://localhost:8000/sendData", {name, password})
+        .then((result) =>{
+            console.log(result)
+        })
     }
 
 
