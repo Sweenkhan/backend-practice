@@ -11,20 +11,22 @@ app.use(urlencoded({extended: true}));
 app.use(cors({origin: "http://localhost:5173"}));
 
 let data = {
+    name:"",
     username: "",
     password: ""
 }
 
 
-app.post("/sendData", async(req, res) => {
+app.post("/register", async(req, res) => {
 
-    let {name, password} = req.body;
+    let {name, username, password} = req.body;
 
-    console.log(name)
+    console.log(username)
 
     let hashedPassword = await bcrypt.hash(password, 10)
 
-    data.username = name
+    data.name= name,
+    data.username = username
     data.password = hashedPassword
 
     res.send("everything is fine")
@@ -33,7 +35,7 @@ app.post("/sendData", async(req, res) => {
 
 app.post("/login", async(req, res) => {
 
-    const {name, password} = req.body;
+    const {username, password} = req.body;
 
     const checkPassword = await bcrypt.compare(password, data.password)
 

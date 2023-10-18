@@ -5,6 +5,7 @@ import axios from "axios"
 function Register() {
 
     const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
   let ujwal = "hai"
@@ -12,9 +13,9 @@ function Register() {
       e.preventDefault();
 
       // console.log(name, password)
-        axios.post("http://localhost:8000/sendData", {name, password})
+        axios.post("http://localhost:8000/register", {name, username, password})
         .then((result) =>{
-            console.log(result)
+            console.log(result.data.message)
         })
     }
 
@@ -25,6 +26,7 @@ function Register() {
 
     <form onSubmit={handleSubmit}>
      <input type='text' value={name} placeholder='enter your name' onChange={(e) => {setName(e.target.value)}}/>
+     <input type='text' value={username} placeholder='enter your username' onChange={(e) => {setUsername(e.target.value)}}/>
      <input type='password' value={password} placeholder='enter your password' onChange={(e) => {setPassword(e.target.value)}}/>
      
      <button type='submit'>Submit</button>

@@ -6,7 +6,7 @@ import axios from "axios"
 function Login() { 
  
 
-    const [name, setName] = useState("")
+    const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
  
@@ -14,9 +14,10 @@ function Login() {
       e.preventDefault();
 
       // console.log(name, password)
-        axios.post("http://localhost:8000/login", {name, password})
+        axios.post("http://localhost:8000/login", {username, password})
         .then((result) =>{
             console.log(result)
+            // localStorage.setItem("session", result.data.session)
         })
     }
 
@@ -26,7 +27,7 @@ function Login() {
     <h1>THis login page</h1>
 
     <form onSubmit={handleSubmit}>
-     <input type='text' value={name} placeholder='enter your name' onChange={(e) => {setName(e.target.value)}}/>
+     <input type='text' value={username} placeholder='enter your username' onChange={(e) => {setUsername(e.target.value)}}/>
      <input type='password' value={password} placeholder='enter your password' onChange={(e) => {setPassword(e.target.value)}}/>
      
      <button type='submit'>Submit</button>
