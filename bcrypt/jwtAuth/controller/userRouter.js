@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import user from "../models/userSchema.js";
 import bcrypt from "bcrypt"; 
-// import cookieParser from "cookie-parser";
+import cookieParser from "cookie-parser";
 
 config();
 const router = express.Router();
@@ -24,6 +24,7 @@ router.post("/register", async(req, res) => {
 
     const userSaved = await newUser.save();
 
+    console.log(userSaved)
     if (userSaved) {
       res.send({ status: 201, message: "Succesfully registerd user" });
     } else {

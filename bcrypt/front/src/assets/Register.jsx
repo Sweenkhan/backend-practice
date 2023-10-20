@@ -15,7 +15,7 @@ function Register() {
       // console.log(name, password)
         axios.post("http://localhost:8000/register", {name, username, password})
         .then((result) =>{
-            console.log(result.data.message)
+            console.log(result.data)
         })
     }
 
