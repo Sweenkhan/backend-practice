@@ -2,8 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import { config } from "dotenv";
 import user from "../models/userSchema.js";
-import bcrypt from "bcrypt"; 
-import cookieParser from "cookie-parser";
+import bcrypt from "bcrypt";  
 
 config();
 const router = express.Router();
@@ -48,16 +47,14 @@ router.post("/login",  async(req, res) => {
   const findUser = await user.findOne({username});
 
   if(findUser){
-      const match = await bcrypt.compare(password, findUser.password);
-    //   console.log(findUser)
+      const match = await bcrypt.compare(password, findUser.password); 
 
     if(match) {
       const token = jwt.sign({ userName: username }, process.env.SECRET_KEY,  { expiresIn: '1h' });
 
-      const session = ("token", token);
-      //   console.log(session);
+      // const session = ("token", token); 
 
-      res.cookie("token", token, { httpOnly: true, secure: true }) 
+      res.cookie("token", token, { httpOnly: true, secure: true, sameSite: 'strict', path: '/', }) 
 
       res.send({ status: 201, message: "Succesfuly logged in!" });
     } else {
@@ -68,10 +65,19 @@ router.post("/login",  async(req, res) => {
 else {
       res.send({ status: 401, message: "Wrong username or password!" });
 }
-
-// res.send({ status: 201, message: "done!" });
+ 
 
 });
+
+
+
+router.get("/check", async(req, res) => {
+
+  console.log(req.cookies)
+  console.log("hiiiiiiiiiiiiiiiiiii")
+  res.send({status: 200, message: "cookie to hai"})
+
+})
 
 
 
